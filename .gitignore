@@ -1,0 +1,7 @@
+node_modules/
+cdk.out/
+infra/cdk-outputs.json
+*.log
+.env
+.env.local
+.DS_Store

@@ -1,0 +1,20 @@
+{
+  "name": "@distributr/infra",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "synth": "cdk synth --quiet",
+    "deploy": "cdk deploy distributr --require-approval never --outputs-file cdk-outputs.json",
+    "deploy:ci-stack": "cdk deploy distributr-ci --require-approval never"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.275.0",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1147.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

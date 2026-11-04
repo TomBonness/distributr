@@ -1,0 +1,28 @@
+{
+  "name": "distributr",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "workspaces": [
+    "functions",
+    "infra"
+  ],
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "node --test \"functions/__tests__/*.test.ts\"",
+    "check": "npm run typecheck && npm test",
+    "synth": "npm run synth --workspace infra",
+    "deploy": "npm run deploy --workspace infra",
+    "deploy:ci-stack": "npm run deploy:ci-stack --workspace infra"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "^5.9.0",
+    "@types/node": "^24.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}
