@@ -7,8 +7,11 @@ import { OidcProviderNative, PolicyStatement, Role, WebIdentityPrincipal } from 
 import type { Construct } from "constructs";
 
 export interface CiStackProps extends StackProps {
-  /** owner/name */
-  repo: string;
+  /**
+   * The repo's OIDC `sub` prefix, as reported by
+   * `gh api repos/<owner>/<repo>/actions/oidc/customization/sub` (`sub_claim_prefix`).
+   */
+  subjectPrefix: string;
 }
 
 export class CiStack extends Stack {
@@ -25,7 +28,7 @@ export class CiStack extends Stack {
       assumedBy: new WebIdentityPrincipal(provider.openIdConnectProviderArn, {
         StringEquals: {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": `repo:${props.repo}:ref:refs/heads/main`,
+          "token.actions.githubusercontent.com:sub": `${props.subjectPrefix}:ref:refs/heads/main`,
         },
       }),
       maxSessionDuration: Duration.hours(1),
